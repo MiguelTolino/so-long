@@ -6,7 +6,7 @@
 #    By: migueltolino <migueltolino@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/24 16:04:19 by user42            #+#    #+#              #
-#    Updated: 2024/12/20 16:35:24 by migueltolin      ###   ########.fr        #
+#    Updated: 2024/12/20 17:17:54 by migueltolin      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ LIBFT_DIR := lib/libft
 MLX_DIR := lib/minilibx_opengl
 
 # Source and Object files
-SRCS := $(wildcard $(SRCS_DIR)*.c)
+GNL := $(wildcard $(SRCS_DIR)/get_next_line/*.c)
+SRCS := $(wildcard $(SRCS_DIR)*.c) $(GNL)
 OBJS := $(SRCS:%.c=%.o)
 
 # Executable name
@@ -37,7 +38,7 @@ NAME := so_long
 
 # Compiler and flags
 CC := gcc
-CFLAGS := -Wall -Werror -Wextra -g
+#CFLAGS := -Wall -Werror -Wextra -g
 LIBS := -lm
 RM := rm -rf
 
