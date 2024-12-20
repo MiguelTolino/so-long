@@ -143,11 +143,11 @@ void validate_map(t_map *map)
         exit(1);
     }
 
-    if (!is_valid_path_with_collectibles(map))
+/*     if (!is_valid_path_with_collectibles(map))
     {
         perror("Error: No valid path to collect all collectibles and reach the exit");
         exit(1);
-    }
+    } */
 }
 
 // Update parse_map function to include the new validation

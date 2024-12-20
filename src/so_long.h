@@ -7,6 +7,10 @@
 # include <fcntl.h>
 
 # include "../lib/libft/includes/libft.h"
+# include "../lib/minilibx_opengl/mlx.h"
+
+#define HEIGHT 600
+#define WIDTH 800
 
 typedef enum e_tile
 {
@@ -29,6 +33,17 @@ typedef struct s_map
     int width;
     int height;
 } t_map;
+
+typedef struct s_mlx
+{
+    void *mlx;
+    void *win;
+    void *img;
+    char *addr;
+    int bits_per_pixel;
+    int line_length;
+    int endian;
+} t_mlx;
 
 
 t_map parse_map(const char *filename);
