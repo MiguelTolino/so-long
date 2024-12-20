@@ -82,5 +82,10 @@ t_map parse_map(const char *filename) {
         exit(1);
     }
 
+    if (!is_valid_path_with_collectibles(&map)) {
+        printf("Error: No valid path to collect all collectibles and reach the exit\n");
+        exit(1);
+    }
+
     return map;
 }

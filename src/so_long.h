@@ -34,5 +34,6 @@ typedef struct s_map
 
 
 t_map parse_map(const char *filename);
+int is_valid_path_with_collectibles(t_map *map);
 
 #endif
