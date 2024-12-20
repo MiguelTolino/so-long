@@ -6,75 +6,85 @@
 #    By: migueltolino <migueltolino@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/24 16:04:19 by user42            #+#    #+#              #
-#    Updated: 2024/12/20 15:59:03 by migueltolin      ###   ########.fr        #
+#    Updated: 2024/12/20 16:35:24 by migueltolin      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-#AUTHOR mmateo-t
-#USAGE
+# AUTHOR: mmateo-t
+# USAGE:
+# make          # compile all binaries
+# make clean    # remove all object files
+# make fclean   # remove all object files and the executable
+# make re       # recompile everything from scratch
 
-#make          #compile all binary
-#make clean		#remove all binaries
-#make fclean		#remove all binaries and executable 
+# Colors
+GREEN := \033[0;32m
+YELLOW := \033[0;33m
+RED := \033[0;31m
+RESET := \033[0m
 
-SRCS_DIR:= src/
+# Directories
+SRCS_DIR := src/
+LIBFT_DIR := lib/libft
+MLX_DIR := lib/minilibx_opengl
 
+# Source and Object files
 SRCS := $(wildcard $(SRCS_DIR)*.c)
-#SRCS_BONUS :=	$(wildcard $(SRCS_DIR_BONUS)*.c) \
-#				$(wildcard $(GNL)*.c) \
-#				$(wildcard $(SRCS_DIR_BONUS)config/*.c) \
-#				$(wildcard $(SRCS_DIR_BONUS)engine/*.c)
-
 OBJS := $(SRCS:%.c=%.o)
-#OBJS_BONUS := $(SRCS_BONUS:%.c=%.o)
-NAME:= so_long
-CC:= gcc
-MLXFLAG =   -Llib/minilibx-linux files/lib/minilibx-linux/libmlx.a -lXext -lX11 -lmlx -lm
-CFLAGS:= -Wall -Werror -Wextra -I.
-MLX_DIR:= lib/minilibx
-RM :=	rm -rvf
-DEBUG_FLAG:= -g
-GNL:= files/lib/get_next_line/
 
+# Executable name
+NAME := so_long
 
-all:	libft minilibx $(NAME) msg
+# Compiler and flags
+CC := gcc
+CFLAGS := -Wall -Werror -Wextra -g
+LIBS := -lm
+RM := rm -rf
 
-$(NAME): $(OBJS)
-	$(CC) $(OBJS) $(GNL)*.c -o $(NAME) $(CFLAGS) $(MLXFLAG) -L$(LIBFT_DIR) $(LIBFT_DIR)/libft.a 
+# Library flags
+LIBFT := $(LIBFT_DIR)/libft.a
+LIBFT_FLAGS := -I$(LIBFT_DIR) -L$(LIBFT_DIR) -lft
+MLX := $(MLX_DIR)/libmlx.a
+MLX_FLAGS := -I$(MLX_DIR) -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 
-bonus: libft minilibx $(OBJS_BONUS) 
-	$(CC) $(OBJS_BONUS) $(GNL)*.c -o $(NAME) $(CFLAGS) $(MLXFLAG) -L$(LIBFT_DIR) $(LIBFT_DIR)/libft.a 
+# Default target
+all: $(NAME)
+	@echo "$(GREEN)All files have been compiled$(RESET)"
 
-$(%.o): $(%.c)
-		$(CC) -c $^ -o $@ 
-		@echo "Creating objects"
+# Link the final executable
+$(NAME): $(OBJS) $(LIBFT) $(MLX)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT_FLAGS) $(MLX_FLAGS) $(LIBS)
+	@echo "$(GREEN)Executable $(NAME) created$(RESET)"
 
-libft:
-		make -C $(LIBFT_DIR)
-		
-minilibx:
-		make -C $(MLX_DIR)
+# Compile libft
+$(LIBFT):
+	make -C $(LIBFT_DIR)
 
+# Compile minilibx
+$(MLX):
+	make -C $(MLX_DIR)
+
+# Compile object files
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+	@echo "$(YELLOW)Creating object file: $@$(RESET)"
+
+# Clean object files
 clean:
-		@echo "Removing objects"
-		make -C $(LIBFT_DIR) clean
-		$(RM) $(OBJS) $(OBJS_BONUS)
-fclean:
-		make clean
-		$(RM) $(NAME) $(IMG)
-		make -C $(LIBFT_DIR) fclean
-		@echo "Removed executable"
-msg:
-		@echo  "\e[42m                   \e[0m"
-		@echo  "\e[92mAll files compiled"
-		@echo  "cub3D built"
-		@echo  "Execute--> ./cub3D 'name'.cub"
-		@echo  "\e[93mENJOY IT!!"
-		@echo  "\e[42m                   \e[0m"
+	$(RM) $(OBJS)
+	@echo "$(RED)All object files have been removed$(RESET)"
+	make -C $(LIBFT_DIR) clean
+	make -C $(MLX_DIR) clean
 
-re:
-	make fclean all
-	@echo "All files has been deleted and recompiled"
+# Clean object files and executable
+fclean: clean
+	$(RM) $(NAME)
+	@echo "$(RED)All object files and the executable have been removed$(RESET)"
+	make -C $(LIBFT_DIR) fclean
 
+# Recompile everything from scratch
+re: fclean all
+	@echo "$(GREEN)All files have been deleted and recompiled$(RESET)"
 
-.PHONY: clean fclean all re objects debug minilibx libft objects bonus
+# Phony targets
+.PHONY: clean fclean all re
