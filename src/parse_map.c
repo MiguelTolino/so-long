@@ -1,4 +1,6 @@
 #include "so_long.h"
+#include <errno.h>
+#include <string.h>
 
 // Function to open the map file
 int open_map_file(const char *filename)
@@ -6,7 +8,7 @@ int open_map_file(const char *filename)
     int fd = open(filename, O_RDONLY);
     if (fd == -1)
     {
-        printf("Error: Could not open file %s\n", filename);
+        perror("Error: Could not open file");
         exit(1);
     }
     return fd;
@@ -31,7 +33,7 @@ void read_map_file(int fd, t_map *map, const char *filename)
         ret = get_next_line(fd, &line);
         if (ret == -1)
         {
-            printf("Error: Could not read file %s\n", filename);
+            perror("Error: Could not read file");
             exit(1);
         }
         if (ft_strncmp(line, "", 1) == 0)
@@ -44,7 +46,7 @@ void read_map_file(int fd, t_map *map, const char *filename)
         }
         else if (map->width != ft_strlen(line))
         {
-            printf("Error: Map is not rectangular\n");
+            perror("Error: Map is not rectangular");
             exit(1);
         }
         map->map = realloc(map->map, (map->height + 1) * sizeof(char *));
@@ -101,7 +103,7 @@ int validate_map_elements(t_map *map)
                 collectible_count++;
             else if (c != '0' && c != '1')
             {
-                printf("Error: Invalid character in map\n");
+                perror("Error: Invalid character in map");
                 return 0;
             }
         }
@@ -109,17 +111,17 @@ int validate_map_elements(t_map *map)
 
     if (exit_count != 1)
     {
-        printf("Error: Map must have exactly one exit (E)\n");
+        perror("Error: Map must have exactly one exit (E)");
         return 0;
     }
     if (player_count != 1)
     {
-        printf("Error: Map must have exactly one player (P)\n");
+        perror("Error: Map must have exactly one player (P)");
         return 0;
     }
     if (collectible_count < 1)
     {
-        printf("Error: Map must have at least one collectible (C)\n");
+        perror("Error: Map must have at least one collectible (C)");
         return 0;
     }
 
@@ -131,19 +133,19 @@ void validate_map(t_map *map)
 {
     if (!is_map_closed(map))
     {
-        printf("Error: Map is not closed\n");
+        perror("Error: Map is not closed");
         exit(1);
     }
 
     if (!validate_map_elements(map))
     {
-        printf("Error: Invalid map elements\n");
+        perror("Error: Invalid map elements");
         exit(1);
     }
 
     if (!is_valid_path_with_collectibles(map))
     {
-        printf("Error: No valid path to collect all collectibles and reach the exit\n");
+        perror("Error: No valid path to collect all collectibles and reach the exit");
         exit(1);
     }
 }
