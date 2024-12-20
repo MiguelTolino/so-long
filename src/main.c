@@ -23,13 +23,5 @@ int main(int argc, char *argv[]) {
     }
 
     map = parse_map(argv[1]);
-    printf("Map width: %d\n", map.width);
-    printf("Map height: %d\n", map.height);
-    for (int i = 0; i < map.height; i++) {
-        printf("%s\n", map.map[i]);
-    }
-    
-
-
     return 0;
 }

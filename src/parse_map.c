@@ -1,9 +1,11 @@
 #include "so_long.h"
 
 // Function to open the map file
-int open_map_file(const char *filename) {
+int open_map_file(const char *filename)
+{
     int fd = open(filename, O_RDONLY);
-    if (fd == -1) {
+    if (fd == -1)
+    {
         printf("Error: Could not open file %s\n", filename);
         exit(1);
     }
@@ -11,55 +13,67 @@ int open_map_file(const char *filename) {
 }
 
 // Function to initialize the map structure
-void init_map(t_map *map) {
+void init_map(t_map *map)
+{
     map->width = 0;
     map->height = 0;
     map->map = NULL;
 }
 
 // Function to read and parse the map file
-void read_map_file(int fd, t_map *map, const char *filename) {
+void read_map_file(int fd, t_map *map, const char *filename)
+{
     char *line;
     int ret;
 
-    while (1) {
+    while (1)
+    {
         ret = get_next_line(fd, &line);
-        printf("line: %s\n", line);
-        if (ret == -1) {
+        if (ret == -1)
+        {
             printf("Error: Could not read file %s\n", filename);
             exit(1);
         }
-        if (ft_strncmp(line, "", 1) == 0) {
+        if (ft_strncmp(line, "", 1) == 0)
+        {
             break;
         }
-        if (map->width == 0) {
+        if (map->width == 0)
+        {
             map->width = ft_strlen(line);
-        } else if (map->width != ft_strlen(line)) {
+        }
+        else if (map->width != ft_strlen(line))
+        {
             printf("Error: Map is not rectangular\n");
             exit(1);
         }
         map->map = realloc(map->map, (map->height + 1) * sizeof(char *));
         map->map[map->height] = line;
         map->height++;
-        if (ret == 0) {
+        if (ret == 0)
+        {
             break;
         }
     }
 }
 
-
 // Function to check if the map is closed
-int is_map_closed(t_map *map) {
+int is_map_closed(t_map *map)
+{
     // Check top and bottom borders
-    for (int i = 0; i < map->width; i++) {
-        if (map->map[0][i] != '1' || map->map[map->height - 1][i] != '1') {
+    for (int i = 0; i < map->width; i++)
+    {
+        if (map->map[0][i] != '1' || map->map[map->height - 1][i] != '1')
+        {
             return 0;
         }
     }
 
     // Check left and right borders
-    for (int i = 0; i < map->height; i++) {
-        if (map->map[i][0] != '1' || map->map[i][map->width - 1] != '1') {
+    for (int i = 0; i < map->height; i++)
+    {
+        if (map->map[i][0] != '1' || map->map[i][map->width - 1] != '1')
+        {
             return 0;
         }
     }
@@ -67,8 +81,76 @@ int is_map_closed(t_map *map) {
     return 1;
 }
 
-// Main function to parse the map
-t_map parse_map(const char *filename) {
+// Function to validate map elements
+int validate_map_elements(t_map *map)
+{
+    int exit_count = 0;
+    int player_count = 0;
+    int collectible_count = 0;
+
+    for (int i = 0; i < map->height; i++)
+    {
+        for (int j = 0; j < map->width; j++)
+        {
+            char c = map->map[i][j];
+            if (c == 'E')
+                exit_count++;
+            else if (c == 'P')
+                player_count++;
+            else if (c == 'C')
+                collectible_count++;
+            else if (c != '0' && c != '1')
+            {
+                printf("Error: Invalid character in map\n");
+                return 0;
+            }
+        }
+    }
+
+    if (exit_count != 1)
+    {
+        printf("Error: Map must have exactly one exit (E)\n");
+        return 0;
+    }
+    if (player_count != 1)
+    {
+        printf("Error: Map must have exactly one player (P)\n");
+        return 0;
+    }
+    if (collectible_count < 1)
+    {
+        printf("Error: Map must have at least one collectible (C)\n");
+        return 0;
+    }
+
+    return 1;
+}
+
+// Function to handle map validation and error messages
+void validate_map(t_map *map)
+{
+    if (!is_map_closed(map))
+    {
+        printf("Error: Map is not closed\n");
+        exit(1);
+    }
+
+    if (!validate_map_elements(map))
+    {
+        printf("Error: Invalid map elements\n");
+        exit(1);
+    }
+
+    if (!is_valid_path_with_collectibles(map))
+    {
+        printf("Error: No valid path to collect all collectibles and reach the exit\n");
+        exit(1);
+    }
+}
+
+// Update parse_map function to include the new validation
+t_map parse_map(const char *filename)
+{
     t_map map;
     int fd;
 
@@ -77,15 +159,7 @@ t_map parse_map(const char *filename) {
     read_map_file(fd, &map, filename);
     close(fd);
 
-    if (!is_map_closed(&map)) {
-        printf("Error: Map is not closed\n");
-        exit(1);
-    }
-
-    if (!is_valid_path_with_collectibles(&map)) {
-        printf("Error: No valid path to collect all collectibles and reach the exit\n");
-        exit(1);
-    }
+    validate_map(&map);
 
     return map;
 }
