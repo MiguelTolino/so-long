@@ -10,6 +10,21 @@
 
 # include "../lib/libft/includes/libft.h"
 
+typedef enum e_tile
+{
+    EMPTY,
+    WALL,
+    PLAYER,
+    COLLECTIBLE,
+    EXIT
+} t_tile;
+
+typedef struct s_pos
+{
+    int x;
+    int y;
+} t_pos;
+
 typedef struct s_map
 {
     char **map;

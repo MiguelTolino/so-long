@@ -13,7 +13,7 @@ int validate_map_file(const char *filename) {
 int main(int argc, char *argv[]) {
 
     t_map map;
-    if (argc < 2) {
+    if (argc != 2) {
         printf("Usage: %s <map_file>\n", argv[0]);
         return 1;
     }
