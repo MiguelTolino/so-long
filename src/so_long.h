@@ -75,5 +75,6 @@ void free_map(t_map *map);
 void destroy_mlx(t_mlx *mlx);
 void cleanup(t_map *map, t_mlx *mlx);
 void run_mlx(t_mlx *mlx);
+void my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
 #endif
