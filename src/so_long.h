@@ -13,6 +13,16 @@
 #define WIDTH_SCREEN 800
 #define WIN_TITLE "so_long"
 
+enum {
+	ON_KEYDOWN = 2,
+	ON_KEYUP = 3,
+	ON_MOUSEDOWN = 4,
+	ON_MOUSEUP = 5,
+	ON_MOUSEMOVE = 6,
+	ON_EXPOSE = 12,
+	ON_DESTROY = 17
+};
+
 typedef enum e_direction
 {
     UP,
@@ -76,5 +86,6 @@ void destroy_mlx(t_mlx *mlx);
 void cleanup(t_map *map, t_mlx *mlx);
 void run_mlx(t_mlx *mlx);
 void my_mlx_pixel_put(t_img *data, int x, int y, int color);
+int  close_game(t_game *game);
 
 #endif

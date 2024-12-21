@@ -1,5 +1,6 @@
 #include "so_long.h"
 
+// Function to put a pixel on the screen
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
 	char	*dst;
