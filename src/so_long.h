@@ -12,6 +12,14 @@
 #define HEIGHT 600
 #define WIDTH 800
 
+typedef enum e_direction
+{
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT
+} t_direction;
+
 typedef enum e_tile
 {
     EMPTY,
@@ -34,19 +42,36 @@ typedef struct s_map
     int height;
 } t_map;
 
-typedef struct s_mlx
+typedef struct s_img
 {
-    void *mlx;
-    void *win;
     void *img;
     char *addr;
     int bits_per_pixel;
     int line_length;
     int endian;
+} t_img;
+
+typedef struct s_mlx
+{
+    void *mlx;
+    void *win;
+    t_img img;
 } t_mlx;
+
+typedef struct s_game
+{
+    t_map *map;
+    t_mlx *mlx;
+    t_pos player;
+    int collectibles;
+    int moves;
+} t_game;
 
 
 t_map parse_map(const char *filename);
 int is_valid_path_with_collectibles(t_map *map);
+void free_map(t_map *map);
+void destroy_mlx(t_mlx *mlx);
+void cleanup(t_map *map, t_mlx *mlx);
 
 #endif
