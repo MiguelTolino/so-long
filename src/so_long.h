@@ -9,8 +9,9 @@
 # include "../lib/libft/includes/libft.h"
 # include "../lib/minilibx_opengl/mlx.h"
 
-#define HEIGHT 600
-#define WIDTH 800
+#define HEIGHT_SCREEN 600
+#define WIDTH_SCREEN 800
+#define WIN_TITLE "so_long"
 
 typedef enum e_direction
 {
@@ -73,5 +74,6 @@ int is_valid_path_with_collectibles(t_map *map);
 void free_map(t_map *map);
 void destroy_mlx(t_mlx *mlx);
 void cleanup(t_map *map, t_mlx *mlx);
+void run_mlx(t_mlx *mlx);
 
 #endif
