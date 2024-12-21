@@ -37,6 +37,11 @@ int main(int argc, char *argv[])
     }
 
     run_mlx(&mlx);
+    while (1)
+    {
+        mlx_loop(mlx.mlx);
+    }
+    
     cleanup(&map, &mlx);
     return 0;
 }
