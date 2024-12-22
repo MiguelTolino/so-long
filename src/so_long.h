@@ -112,5 +112,6 @@ int handle_key_press(int keycode, t_game *game);
 void setup_hooks(t_game *game);
 void clear_image(t_mlx *mlx);
 void load_sprites(t_mlx *mlx);
+int update_game(t_game *game);
 
 #endif

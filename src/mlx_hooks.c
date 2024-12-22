@@ -54,8 +54,3 @@ int handle_key_press(int keycode, t_game *game)
     return 0;
 }
 
-void setup_hooks(t_game *game)
-{
-    mlx_hook(game->mlx->win, ON_KEYDOWN, 0, handle_key_press, game);
-    mlx_hook(game->mlx->win, ON_DESTROY, 0, close_game, game);
-}
