@@ -1,6 +1,6 @@
 #include "so_long.h"
 
-t_game init_game(t_game *game, t_map *map, t_mlx *mlx)
+void init_game(t_game *game, t_map *map, t_mlx *mlx)
 {
     game->map = map;
     game->mlx = mlx;
@@ -20,6 +20,12 @@ int validate_map_file(const char *filename)
         return 1;
     }
     return 0;
+}
+
+void game_loop(t_game *game)
+{
+    setup_hooks(game);
+    mlx_loop(game->mlx->mlx);
 }
 
 int main(int argc, char *argv[])
@@ -48,13 +54,11 @@ int main(int argc, char *argv[])
 
     run_mlx(&mlx);
     init_game(&game, &map, &mlx);
-
     while (1)
     {
-        my_mlx_pixel_put(&mlx.img, WIDTH_SCREEN / 2, HEIGHT_SCREEN / 2, 0x00FF0000);
-        mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img.img, 0, 0);
-        mlx_loop(mlx.mlx);
+        game_loop(&game);
     }
+
     cleanup(&map, &mlx);
     return 0;
 }

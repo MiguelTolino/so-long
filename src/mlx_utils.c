@@ -41,3 +41,12 @@ void run_mlx(t_mlx *mlx) {
         exit(1);
     }
 }
+
+// Function to clear the image
+void clear_image(t_mlx *mlx)
+{
+    mlx_clear_window(mlx->mlx, mlx->win);
+    mlx_destroy_image(mlx->mlx, mlx->img.img);
+    mlx->img.img = mlx_new_image(mlx->mlx, WIDTH_SCREEN, HEIGHT_SCREEN);
+    mlx->img.addr = mlx_get_data_addr(mlx->img.img, &mlx->img.bits_per_pixel, &mlx->img.line_length, &mlx->img.endian);
+}

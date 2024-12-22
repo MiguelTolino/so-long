@@ -87,5 +87,9 @@ void cleanup(t_map *map, t_mlx *mlx);
 void run_mlx(t_mlx *mlx);
 void my_mlx_pixel_put(t_img *data, int x, int y, int color);
 int  close_game(t_game *game);
+void game_loop(t_game *game);
+int handle_key_press(int keycode, t_game *game);
+void setup_hooks(t_game *game);
+void clear_image(t_mlx *mlx);
 
 #endif

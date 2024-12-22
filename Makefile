@@ -6,7 +6,7 @@
 #    By: migueltolino <migueltolino@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/24 16:04:19 by user42            #+#    #+#              #
-#    Updated: 2024/12/20 17:17:54 by migueltolin      ###   ########.fr        #
+#    Updated: 2024/12/22 20:02:00 by migueltolin      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,8 @@ NAME := so_long
 
 # Compiler and flags
 CC := gcc
-#CFLAGS := -Wall -Werror -Wextra -g
+# CFLAGS := -Wall -Werror -Wextra
+DEBUG_FLAGS := -g
 LIBS := -lm
 RM := rm -rf
 
@@ -87,5 +88,9 @@ fclean: clean
 re: fclean all
 	@echo "$(GREEN)All files have been deleted and recompiled$(RESET)"
 
+# Debug target
+debug: CFLAGS += $(DEBUG_FLAGS)
+debug: re
+
 # Phony targets
-.PHONY: clean fclean all re
+.PHONY: clean fclean all re debug
