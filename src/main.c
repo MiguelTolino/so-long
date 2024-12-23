@@ -1,10 +1,5 @@
 #include "so_long.h"
 
-void draw_tile(t_game *game, t_img *img, int x, int y)
-{
-    mlx_put_image_to_window(game->mlx->mlx, game->mlx->win, img->img, x * TILE_SIZE, y * TILE_SIZE);
-}
-
 void init_game(t_game *game, t_map *map, t_mlx *mlx)
 {
     game->map = map;
@@ -45,6 +40,7 @@ int validate_map_file(const char *filename)
 
 void game_loop(t_game *game)
 {
+    draw_map(game);
     mlx_hook(game->mlx->win, ON_KEYDOWN, 0, handle_key_press, game);
     mlx_hook(game->mlx->win, ON_DESTROY, 0, close_game, game);
     //mlx_loop_hook(game->mlx->mlx, update_game, &game);
@@ -75,7 +71,7 @@ int main(int argc, char *argv[])
     }
 
     run_mlx(&mlx);
-    // load_sprites(&mlx); // Cargar los sprites
+    load_sprites(&mlx);
     init_game(&game, &map, &mlx);
     while (1)
     {

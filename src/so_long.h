@@ -15,12 +15,12 @@
 #define WIN_TITLE "so_long"
 #define TILE_SIZE 32
 
-#define PLAYER_SPRITE "path/to/player.xpm"
-#define WALL_SPRITE "path/to/wall.xpm"
-#define COLLECTIBLE_SPRITE "path/to/collectible.xpm"
-#define EXIT_SPRITE "path/to/exit.xpm"
-#define EMPTY_SPRITE "path/to/empty.xpm"
-#define TERRAIN_SPRITE "../textures/wests_textures/grass1.png"
+#define PLAYER_SPRITE "sprites/xpm/p.xpm"
+#define WALL_SPRITE "sprites/xpm/1.xpm"
+#define COLLECTIBLE_SPRITE "sprites/xpm/c.xpm"
+#define EXIT_SPRITE "sprites/xpm/e.xpm"
+#define EMPTY_SPRITE "sprites/xpm/0.xpm"
+#define TERRAIN_SPRITE "sprites/xpm/y.xpm"
 
 
 enum {
@@ -40,15 +40,6 @@ typedef enum e_direction
     LEFT,
     RIGHT
 } t_direction;
-
-typedef enum e_tile
-{
-    EMPTY,
-    WALL,
-    PLAYER,
-    COLLECTIBLE,
-    EXIT
-} t_tile;
 
 typedef struct s_pos
 {
@@ -113,5 +104,7 @@ void setup_hooks(t_game *game);
 void clear_image(t_mlx *mlx);
 void load_sprites(t_mlx *mlx);
 int update_game(t_game *game);
+void draw_map(t_game *game);
+void game_loop(t_game *game);
 
 #endif
