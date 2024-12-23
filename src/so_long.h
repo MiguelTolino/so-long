@@ -22,7 +22,6 @@
 #define EMPTY_SPRITE "sprites/xpm/0.xpm"
 #define TERRAIN_SPRITE "sprites/xpm/y.xpm"
 
-
 enum {
     ON_KEYDOWN = 2,
     ON_KEYUP = 3,
@@ -32,14 +31,6 @@ enum {
     ON_EXPOSE = 12,
     ON_DESTROY = 17
 };
-
-typedef enum e_direction
-{
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT
-} t_direction;
 
 typedef struct s_pos
 {
