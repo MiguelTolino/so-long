@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
     run_mlx(&mlx);
     init_game(&game, &map, &mlx);
     load_sprites(&mlx);
-    mlx_loop_hook(mlx.mlx, game_loop, &game); // Set up the game loop
+    mlx_loop_hook(mlx.mlx, game_loop, &game);
     mlx_loop(mlx.mlx);
 
     cleanup(&map, &mlx);

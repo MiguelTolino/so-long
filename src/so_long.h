@@ -13,7 +13,7 @@
 #define HEIGHT_SCREEN 600
 #define WIDTH_SCREEN 800
 #define WIN_TITLE "so_long"
-#define TILE_SIZE 32
+#define TILE_SIZE 50
 
 #define PLAYER_SPRITE "sprites/xpm/p.xpm"
 #define WALL_SPRITE "sprites/xpm/1.xpm"
@@ -52,6 +52,8 @@ typedef struct s_img
     int bits_per_pixel;
     int line_length;
     int endian;
+    int width;
+    int height;
 } t_img;
 
 typedef struct s_sprites
@@ -97,5 +99,6 @@ int update_game(t_game *game);
 void draw_map(t_game *game);
 int game_loop(t_game *game);
 void render_game(t_game *game);
+int move_player(t_game *game, int x, int y);
 
 #endif

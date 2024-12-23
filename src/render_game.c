@@ -2,7 +2,7 @@
 
 void draw_tile(t_game *game, t_img *img, int x, int y)
 {
-    mlx_put_image_to_window(game->mlx->mlx, game->mlx->win, img->img, x * TILE_SIZE, y * TILE_SIZE);
+    mlx_put_image_to_window(game->mlx->mlx, game->mlx->win, img->img, x * img->width, y * img->height);
 }
 
 void display_moves(t_game *game)
@@ -13,7 +13,6 @@ void display_moves(t_game *game)
     mlx_string_put(game->mlx->mlx, game->mlx->win, 10, 10, 0xFFFF00, "Moves: ");
     mlx_string_put(game->mlx->mlx, game->mlx->win, 70, 10, 0xFFFF00, move_str);
     free(move_str);
-    game->moves++;
 }
 
 void draw_map(t_game *game)

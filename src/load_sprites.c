@@ -12,6 +12,8 @@ void load_sprite(t_mlx *mlx, t_img *img, const char *path)
         exit(1);
     }
     img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length, &img->endian);
+    img->width = width;
+    img->height = height;
 }
 
 void load_sprites(t_mlx *mlx)

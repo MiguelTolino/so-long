@@ -9,28 +9,23 @@ int handle_key_press(int keycode, t_game *game)
 {
     if (keycode == 53) // Escape key
     {
-        printf("Game closed\n");
         close_game(game);
     }
     else if (keycode == 13) // W key
     {
-        printf("W key pressed\n");
-        // Mueve el jugador hacia arriba
+        move_player(game, game->player.x, game->player.y - 1);
     }
     else if (keycode == 0) // A key
     {
-        printf("A key pressed\n");
-        // Mueve el jugador hacia la izquierda
+        move_player(game, game->player.x - 1, game->player.y);
     }
     else if (keycode == 1) // S key
     {
-        printf("S key pressed\n");
-        // Mueve el jugador hacia abajo
+        move_player(game, game->player.x, game->player.y + 1);
     }
     else if (keycode == 2) // D key
     {
-        printf("D key pressed\n");
-        // Mueve el jugador hacia la derecha
+        move_player(game, game->player.x + 1, game->player.y);
     }
     return 0;
 }
