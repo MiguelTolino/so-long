@@ -38,13 +38,12 @@ int validate_map_file(const char *filename)
     return 0;
 }
 
-void game_loop(t_game *game)
+int game_loop(t_game *game)
 {
-    draw_map(game);
+    render_game(game);
     mlx_hook(game->mlx->win, ON_KEYDOWN, 0, handle_key_press, game);
     mlx_hook(game->mlx->win, ON_DESTROY, 0, close_game, game);
-    //mlx_loop_hook(game->mlx->mlx, update_game, &game);
-    mlx_loop(game->mlx->mlx);
+    return 0;
 }
 
 int main(int argc, char *argv[])
@@ -71,12 +70,10 @@ int main(int argc, char *argv[])
     }
 
     run_mlx(&mlx);
-    load_sprites(&mlx);
     init_game(&game, &map, &mlx);
-    while (1)
-    {
-        game_loop(&game);
-    }
+    load_sprites(&mlx);
+    mlx_loop_hook(mlx.mlx, game_loop, &game); // Set up the game loop
+    mlx_loop(mlx.mlx);
 
     cleanup(&map, &mlx);
     return 0;

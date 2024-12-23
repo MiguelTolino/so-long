@@ -49,7 +49,7 @@ void draw_map(t_game *game)
     }
 }
 
-void draw(t_game *game)
+void render_game(t_game *game)
 {
     clear_image(game->mlx);
     draw_map(game);
