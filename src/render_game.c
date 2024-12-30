@@ -23,17 +23,17 @@ void draw_map(t_game *game)
     {
         for (int x = 0; x < game->map->width; x++)
         {
-            tile  = game->map->map[y][x];
+            tile = game->map->map[y][x];
             switch (tile)
             {
-            case '1':
-                draw_tile(game, &game->mlx->sprites.wall, x, y);
-                break;
             case 'P':
                 draw_tile(game, &game->mlx->sprites.player, x, y);
                 break;
             case 'C':
                 draw_tile(game, &game->mlx->sprites.collectible, x, y);
+                break;
+            case '1':
+                draw_tile(game, &game->mlx->sprites.wall, x, y);
                 break;
             case 'E':
                 draw_tile(game, &game->mlx->sprites.exit, x, y);

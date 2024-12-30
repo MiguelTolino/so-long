@@ -1,19 +1,19 @@
 #ifndef SO_LONG_H
-# define SO_LONG_H
+#define SO_LONG_H
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <fcntl.h>
-# include <time.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <fcntl.h>
+#include <time.h>
+#include <math.h>
 
-# include "../lib/libft/includes/libft.h"
-# include "../lib/minilibx_opengl/mlx.h"
+#include "../lib/libft/includes/libft.h"
+#include "../lib/minilibx_opengl/mlx.h"
 
 #define HEIGHT_SCREEN 600
 #define WIDTH_SCREEN 800
 #define WIN_TITLE "so_long"
-#define TILE_SIZE 50
 
 #define PLAYER_SPRITE "sprites/xpm/p.xpm"
 #define WALL_SPRITE "sprites/xpm/1.xpm"
@@ -22,7 +22,8 @@
 #define EMPTY_SPRITE "sprites/xpm/0.xpm"
 #define TERRAIN_SPRITE "sprites/xpm/y.xpm"
 
-enum {
+enum
+{
     ON_KEYDOWN = 2,
     ON_KEYUP = 3,
     ON_MOUSEDOWN = 4,
@@ -72,6 +73,9 @@ typedef struct s_mlx
     void *win;
     t_img img;
     t_sprites sprites;
+    int win_width;
+    int win_height;
+
 } t_mlx;
 
 typedef struct s_game
@@ -90,11 +94,11 @@ void destroy_mlx(t_mlx *mlx);
 void cleanup(t_map *map, t_mlx *mlx);
 void run_mlx(t_mlx *mlx);
 void my_mlx_pixel_put(t_img *data, int x, int y, int color);
-int  close_game(t_game *game);
+int close_game(t_game *game);
 int handle_key_press(int keycode, t_game *game);
 void setup_hooks(t_game *game);
 void clear_image(t_mlx *mlx);
-void load_sprites(t_mlx *mlx);
+void load_sprites(t_mlx *mlx, t_game *game);
 int update_game(t_game *game);
 void draw_map(t_game *game);
 int game_loop(t_game *game);
@@ -102,5 +106,7 @@ void render_game(t_game *game);
 int move_player(t_game *game, int x, int y);
 void init_game(t_game *game, t_map *map, t_mlx *mlx);
 void print_game_state(t_game *game);
+void init_mlx(t_mlx *mlx);
+void create_window_and_image(t_mlx *mlx);
 
 #endif

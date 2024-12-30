@@ -4,10 +4,13 @@ void init_game(t_game *game, t_map *map, t_mlx *mlx)
 {
     game->map = map;
     game->mlx = mlx;
+    mlx->win_height = HEIGHT_SCREEN;
+    mlx->win_width = WIDTH_SCREEN;
     game->player.x = 0;
     game->player.y = 0;
     game->collectibles = 0;
     game->moves = 0;
+    init_mlx(mlx);
 
     for (int y = 0; y < map->height; y++)
     {

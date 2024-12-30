@@ -35,12 +35,11 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    run_mlx(&mlx);
     init_game(&game, &map, &mlx);
-    load_sprites(&mlx);
+    load_sprites(&mlx, &game);
+    create_window_and_image(&mlx);
     mlx_loop_hook(mlx.mlx, game_loop, &game);
     mlx_loop(mlx.mlx);
-
     cleanup(&map, &mlx);
     return 0;
 }
