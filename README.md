@@ -29,10 +29,6 @@ El objetivo del juego es que un personaje (puede ser un delfín, un pez, etc.) r
 ### Validación del Camino del Mapa
 - Robrodri necesita implementar la función de validación del camino en `is_valid_path_with_collectibles.c`. Esta función debe asegurarse de que el jugador pueda recolectar todos los coleccionables y llegar a la salida.
 
-### Mejorar la Jugabilidad
-- Ajustar el movimiento del jugador para que sea más fluido.
-- Implementar nuevas mecánicas de juego si es necesario.
-
 ### Nuevos Estilos y Sprites
 - Crear y agregar nuevos sprites para darle un nuevo estilo al juego.
 - Asegurarse de que los nuevos sprites se integren bien con el resto del juego.
