@@ -33,10 +33,6 @@ El objetivo del juego es que un personaje (puede ser un delfín, un pez, etc.) r
 - Ajustar el movimiento del jugador para que sea más fluido.
 - Implementar nuevas mecánicas de juego si es necesario.
 
-### Ajuste de Sprites
-- Retocar el ajuste de los sprites para que se vean centrados y a pantalla completa.
-- Asegurarse de que los sprites se escalen correctamente según el tamaño de la ventana.
-
 ### Nuevos Estilos y Sprites
 - Crear y agregar nuevos sprites para darle un nuevo estilo al juego.
 - Asegurarse de que los nuevos sprites se integren bien con el resto del juego.
