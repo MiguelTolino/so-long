@@ -6,7 +6,7 @@
 #    By: migueltolino <migueltolino@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/24 16:04:19 by user42            #+#    #+#              #
-#    Updated: 2024/12/22 20:02:00 by migueltolin      ###   ########.fr        #
+#    Updated: 2024/12/30 13:04:35 by migueltolin      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ NAME := so_long
 
 # Compiler and flags
 CC := gcc
-# CFLAGS := -Wall -Werror -Wextra
+CFLAGS := -Wall -Werror -Wextra
 DEBUG_FLAGS := -g
 LIBS := -lm
 RM := rm -rf

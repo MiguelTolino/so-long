@@ -24,6 +24,17 @@ void adjust_window_size(t_game *game)
     int new_window_width = max_sprite_width * game->map->width;
     int new_window_height = max_sprite_height * game->map->height;
 
+    printf("Current window width: %d, Current window height: %d\n", game->mlx->win_width, game->mlx->win_height);
+    printf("New window width: %d, New window height: %d\n", new_window_width, new_window_height);
+
+    // Usar las constantes para la resolución máxima de la pantalla
+    if (new_window_width > MAX_SCREEN_WIDTH) {
+        new_window_width = MAX_SCREEN_WIDTH;
+    }
+    if (new_window_height > MAX_SCREEN_HEIGHT) {
+        new_window_height = MAX_SCREEN_HEIGHT;
+    }
+
     printf("New window width: %d, New window height: %d\n", new_window_width, new_window_height);
     printf("Max sprite width: %d, Max sprite height: %d\n", max_sprite_width, max_sprite_height);
 

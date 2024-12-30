@@ -23,7 +23,7 @@ void init_map(t_map *map)
 }
 
 // Function to read and parse the map file
-void read_map_file(int fd, t_map *map, const char *filename)
+void read_map_file(int fd, t_map *map)
 {
     char *line;
     int ret;
@@ -44,7 +44,7 @@ void read_map_file(int fd, t_map *map, const char *filename)
         {
             map->width = ft_strlen(line);
         }
-        else if (map->width != ft_strlen(line))
+        else if (map->width != (int)ft_strlen(line))
         {
             perror("Error: Map is not rectangular");
             exit(1);
@@ -158,7 +158,7 @@ t_map parse_map(const char *filename)
 
     fd = open_map_file(filename);
     init_map(&map);
-    read_map_file(fd, &map, filename);
+    read_map_file(fd, &map);
     close(fd);
 
     validate_map(&map);

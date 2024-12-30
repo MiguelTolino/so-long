@@ -13,6 +13,8 @@
 
 #define HEIGHT_SCREEN 600
 #define WIDTH_SCREEN 800
+#define MAX_SCREEN_WIDTH 2560
+#define MAX_SCREEN_HEIGHT 1600
 #define WIN_TITLE "so_long"
 
 #define PLAYER_SPRITE "sprites/xpm/p.xpm"
