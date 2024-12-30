@@ -34,6 +34,5 @@ int game_loop(t_game *game)
     render_game(game);
     mlx_hook(game->mlx->win, ON_KEYDOWN, 0, handle_key_press, game);
     mlx_hook(game->mlx->win, ON_DESTROY, 0, close_game, game);
-    print_game_state(game);
     return 0;
 }
