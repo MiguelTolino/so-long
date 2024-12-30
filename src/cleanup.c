@@ -12,7 +12,6 @@ void free_map(t_map *map) {
 void free_sprite_image(void *mlx, t_img *sprite) {
     if (sprite->img) {
         mlx_destroy_image(mlx, sprite->img);
-        free(sprite->addr);
     }
 }
 
