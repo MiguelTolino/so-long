@@ -8,26 +8,22 @@ void free_map(t_map *map) {
     free(map->map);
 }
 
+// Function to free a single sprite image
+void free_sprite_image(void *mlx, t_img *sprite) {
+    if (sprite->img) {
+        mlx_destroy_image(mlx, sprite->img);
+        free(sprite->addr);
+    }
+}
+
 // Function to free all sprite images
 void free_sprites(t_mlx *mlx) {
-    if (mlx->sprites.player.img) {
-        mlx_destroy_image(mlx->mlx, mlx->sprites.player.img);
-    }
-    if (mlx->sprites.wall.img) {
-        mlx_destroy_image(mlx->mlx, mlx->sprites.wall.img);
-    }
-    if (mlx->sprites.collectible.img) {
-        mlx_destroy_image(mlx->mlx, mlx->sprites.collectible.img);
-    }
-    if (mlx->sprites.exit.img) {
-        mlx_destroy_image(mlx->mlx, mlx->sprites.exit.img);
-    }
-    if (mlx->sprites.empty.img) {
-        mlx_destroy_image(mlx->mlx, mlx->sprites.empty.img);
-    }
-    if (mlx->sprites.terrain.img) {
-        mlx_destroy_image(mlx->mlx, mlx->sprites.terrain.img);
-    }
+    free_sprite_image(mlx->mlx, &mlx->sprites.player);
+    free_sprite_image(mlx->mlx, &mlx->sprites.wall);
+    free_sprite_image(mlx->mlx, &mlx->sprites.collectible);
+    free_sprite_image(mlx->mlx, &mlx->sprites.exit);
+    free_sprite_image(mlx->mlx, &mlx->sprites.empty);
+    free_sprite_image(mlx->mlx, &mlx->sprites.terrain);
 }
 
 // Function to destroy MiniLibX resources
