@@ -1,6 +1,5 @@
 #include "so_long.h"
 
-
 // Function to validate the map file extension
 int validate_map_file(const char *filename)
 {
@@ -12,7 +11,6 @@ int validate_map_file(const char *filename)
     }
     return 0;
 }
-
 
 int main(int argc, char *argv[])
 {

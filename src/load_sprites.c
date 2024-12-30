@@ -14,6 +14,8 @@ void load_sprite(t_mlx *mlx, t_img *img, const char *path)
     img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length, &img->endian);
     img->width = width;
     img->height = height;
+    printf("Loaded sprite from %s\n", path);
+    printf("Width: %d, Height: %d\n", width, height);
 }
 
 void load_sprites(t_mlx *mlx)
@@ -22,6 +24,6 @@ void load_sprites(t_mlx *mlx)
     load_sprite(mlx, &mlx->sprites.wall, WALL_SPRITE);
     load_sprite(mlx, &mlx->sprites.collectible, COLLECTIBLE_SPRITE);
     load_sprite(mlx, &mlx->sprites.exit, EXIT_SPRITE);
-    load_sprite(mlx, &mlx->sprites.empty, EMPTY_SPRITE); 
+    load_sprite(mlx, &mlx->sprites.empty, EMPTY_SPRITE);
     load_sprite(mlx, &mlx->sprites.terrain, TERRAIN_SPRITE);
 }

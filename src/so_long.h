@@ -101,5 +101,6 @@ int game_loop(t_game *game);
 void render_game(t_game *game);
 int move_player(t_game *game, int x, int y);
 void init_game(t_game *game, t_map *map, t_mlx *mlx);
+void print_game_state(t_game *game);
 
 #endif
