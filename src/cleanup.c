@@ -8,8 +8,31 @@ void free_map(t_map *map) {
     free(map->map);
 }
 
+// Function to free all sprite images
+void free_sprites(t_mlx *mlx) {
+    if (mlx->sprites.player.img) {
+        mlx_destroy_image(mlx->mlx, mlx->sprites.player.img);
+    }
+    if (mlx->sprites.wall.img) {
+        mlx_destroy_image(mlx->mlx, mlx->sprites.wall.img);
+    }
+    if (mlx->sprites.collectible.img) {
+        mlx_destroy_image(mlx->mlx, mlx->sprites.collectible.img);
+    }
+    if (mlx->sprites.exit.img) {
+        mlx_destroy_image(mlx->mlx, mlx->sprites.exit.img);
+    }
+    if (mlx->sprites.empty.img) {
+        mlx_destroy_image(mlx->mlx, mlx->sprites.empty.img);
+    }
+    if (mlx->sprites.terrain.img) {
+        mlx_destroy_image(mlx->mlx, mlx->sprites.terrain.img);
+    }
+}
+
 // Function to destroy MiniLibX resources
 void destroy_mlx(t_mlx *mlx) {
+    free_sprites(mlx);
     if (mlx->img.img) {
         mlx_destroy_image(mlx->mlx, mlx->img.img);
     }
