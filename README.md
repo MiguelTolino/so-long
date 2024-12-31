@@ -10,7 +10,7 @@ El objetivo del juego es que un personaje recolecte todos los objetos colecciona
 
 1. Clonar el repositorio.
     ```sh
-    git clone git@github.com:MiguelTolino/so-long.git
+    git clone https://github.com/MiguelTolino/so-long.git
     ```
 2. Navegar al directorio del proyecto.
     ```sh
@@ -22,7 +22,7 @@ El objetivo del juego es que un personaje recolecte todos los objetos colecciona
     ```
 4. Ejecutar el juego con un archivo de mapa.
     ```sh
-    ./so_long <map_file.ber>
+    ./so_long <maps/map_file.ber>
     ```
 
 ## 🎮 Controles del Juego
