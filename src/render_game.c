@@ -1,8 +1,70 @@
 #include "so_long.h"
 
-void draw_tile(t_game *game, t_img *img, int x, int y)
+void draw_all_tiles(t_game *game)
 {
-    mlx_put_image_to_window(game->mlx->mlx, game->mlx->win, img->img, x * img->width, y * img->height);
+    int scaled_width = game->mlx->win_width / game->map->width;
+    int scaled_height = game->mlx->win_height / game->map->height;
+    char *img_data;
+    int bpp, size_line, endian;
+
+    // Initialize a single image
+    void *img = mlx_new_image(game->mlx->mlx, game->mlx->win_width, game->mlx->win_height);
+    img_data = mlx_get_data_addr(img, &bpp, &size_line, &endian);
+
+    for (int y = 0; y < game->map->height; y++)
+    {
+        for (int x = 0; x < game->map->width; x++)
+        {
+            t_img *current_img;
+            switch (game->map->map[y][x])
+            {
+                case 'P':
+                    current_img = &game->mlx->sprites.player;
+                    break;
+                case 'C':
+                    current_img = &game->mlx->sprites.collectible;
+                    break;
+                case '1':
+                    current_img = &game->mlx->sprites.wall;
+                    break;
+                case 'E':
+                    current_img = &game->mlx->sprites.exit;
+                    break;
+                case '0':
+                default:
+                    current_img = &game->mlx->sprites.empty;
+                    break;
+            }
+
+            // Iterate over each pixel of the sprite
+            for (int i = 0; i < current_img->height; i++)
+            {
+                for (int j = 0; j < current_img->width; j++)
+                {
+                    // Calculate the position in the window
+                    int win_x = x * scaled_width + j;
+                    int win_y = y * scaled_height + i;
+                    
+                    if (win_x >= game->mlx->win_width || win_y >= game->mlx->win_height)
+                        continue;
+
+                    // Get the color from the sprite
+                    unsigned int color = ((unsigned int*)current_img->addr)[i * current_img->width + j];
+
+                    // Calculate the position in the image data
+                    int pixel = (win_y * size_line) + (win_x * (bpp / 8));
+                    img_data[pixel] = color & 0xFF; // Blue
+                    img_data[pixel + 1] = (color >> 8) & 0xFF; // Green
+                    img_data[pixel + 2] = (color >> 16) & 0xFF; // Red
+                    img_data[pixel + 3] = (color >> 24) & 0xFF; // Alpha
+                }
+            }
+        }
+    }
+
+    // Put the single image to the window
+    mlx_put_image_to_window(game->mlx->mlx, game->mlx->win, img, 0, 0);
+    mlx_destroy_image(game->mlx->mlx, img);
 }
 
 void display_moves(t_game *game)
@@ -15,42 +77,9 @@ void display_moves(t_game *game)
     free(move_str);
 }
 
-void draw_map(t_game *game)
-{
-    char tile;
-
-    for (int y = 0; y < game->map->height; y++)
-    {
-        for (int x = 0; x < game->map->width; x++)
-        {
-            tile = game->map->map[y][x];
-            switch (tile)
-            {
-            case 'P':
-                draw_tile(game, &game->mlx->sprites.player, x, y);
-                break;
-            case 'C':
-                draw_tile(game, &game->mlx->sprites.collectible, x, y);
-                break;
-            case '1':
-                draw_tile(game, &game->mlx->sprites.wall, x, y);
-                break;
-            case 'E':
-                draw_tile(game, &game->mlx->sprites.exit, x, y);
-                break;
-            case '0':
-                draw_tile(game, &game->mlx->sprites.empty, x, y);
-                break;
-            default:
-                break;
-            }
-        }
-    }
-}
-
 void render_game(t_game *game)
 {
     clear_image(game->mlx);
-    draw_map(game);
+    draw_all_tiles(game);
     display_moves(game);
 }
