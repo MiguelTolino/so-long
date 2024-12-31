@@ -128,7 +128,7 @@ int close_game(t_game *game);
 int handle_key_press(int keycode, t_game *game);
 void setup_hooks(t_game *game);
 void clear_image(t_mlx *mlx);
-void load_sprites(t_mlx *mlx, t_game *game);
+void load_sprites(t_mlx *mlx);
 int update_game(t_game *game);
 void draw_map(t_game *game);
 int game_loop(t_game *game);
@@ -138,5 +138,6 @@ void init_game(t_game *game, t_map *map, t_mlx *mlx);
 void print_game_state(t_game *game);
 void init_mlx(t_mlx *mlx);
 void create_window_and_image(t_mlx *mlx);
+void adjust_window_size(t_game *game);
 
 #endif

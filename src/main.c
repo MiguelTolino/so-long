@@ -12,15 +12,15 @@ int validate_map_file(const char *filename)
     return 0;
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
+    t_game game;
     t_map map;
     t_mlx mlx;
-    t_game game;
 
     if (argc != 2)
     {
-        printf("Usage: %s <map_file>\n", argv[0]);
+        fprintf(stderr, "Usage: %s <map_file>\n", argv[0]);
         return 1;
     }
 
@@ -36,7 +36,8 @@ int main(int argc, char *argv[])
     }
 
     init_game(&game, &map, &mlx);
-    load_sprites(&mlx, &game);
+    load_sprites(&mlx);
+    adjust_window_size(&game);
     create_window_and_image(&mlx);
     mlx_loop_hook(mlx.mlx, game_loop, &game);
     mlx_loop(mlx.mlx);

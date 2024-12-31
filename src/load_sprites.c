@@ -56,14 +56,12 @@ void load_sprite(t_mlx *mlx, t_img *img, const char *path)
     printf("Loaded sprite from %s (width: %d, height: %d)\n", path, width, height);
 }
 
-void load_sprites(t_mlx *mlx, t_game *game)
+void load_sprites(t_mlx *mlx)
 {
     load_sprite(mlx, &mlx->sprites.player, PLAYER_SPRITE);
     load_sprite(mlx, &mlx->sprites.wall, WALL_SPRITE);
     load_sprite(mlx, &mlx->sprites.collectible, COLLECTIBLE_SPRITE);
     load_sprite(mlx, &mlx->sprites.exit, EXIT_SPRITE);
     load_sprite(mlx, &mlx->sprites.empty, EMPTY_SPRITE);
-    load_sprite(mlx, &mlx->sprites.terrain, TERRAIN_SPRITE);
-    
-    adjust_window_size(game);
+    load_sprite(mlx, &mlx->sprites.terrain, TERRAIN_SPRITE);    
 }
