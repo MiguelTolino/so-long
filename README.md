@@ -38,6 +38,10 @@ El objetivo del juego es que un personaje recolecte todos los objetos colecciona
 ![Captura de Pantalla 1](screenshots/screenshot1.png)
 ![Captura de Pantalla 2](screenshots/screenshot2.png)
 
+## ⚠️ Requisitos del Sistema
+
+Este proyecto solo funciona en **MacOS** con **OpenGL**.
+
 ## 🤝 Contribuciones
 
 ¡Las contribuciones son bienvenidas! Si tienes alguna idea o mejora, por favor abre un issue o envía un pull request.
