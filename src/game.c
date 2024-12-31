@@ -32,7 +32,11 @@ void init_game(t_game *game, t_map *map, t_mlx *mlx)
 int game_loop(t_game *game)
 {
     render_game(game);
-    mlx_hook(game->mlx->win, ON_KEYDOWN, 0, handle_key_press, game);
-    mlx_hook(game->mlx->win, ON_DESTROY, 0, close_game, game);
+    while (1)
+    {
+        mlx_hook(game->mlx->win, ON_KEYDOWN, 0, handle_key_press, game);
+        mlx_hook(game->mlx->win, ON_DESTROY, 0, close_game, game);
+        mlx_loop(game->mlx->mlx);
+    }
     return 0;
 }

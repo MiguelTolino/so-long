@@ -28,6 +28,7 @@ int handle_key_press(int keycode, t_game *game)
         move_player(game, game->player.x + 1, game->player.y);
     }
     print_game_state(game);
+    render_game(game);
     return 0;
 }
 
