@@ -25,8 +25,8 @@ void adjust_window_size(t_game *game)
     int new_window_height = max_sprite_height * game->map->height;
 
     // Usar las constantes para la resolución máxima de la pantalla
-    if (new_window_width > MAX_SCREEN_WIDTH) {
-        new_window_width = MAX_SCREEN_WIDTH;
+    if (new_window_width > (int)MAX_SCREEN_WIDTH) {
+        new_window_width = (int)MAX_SCREEN_WIDTH;
     }
     if (new_window_height > MAX_SCREEN_HEIGHT) {
         new_window_height = MAX_SCREEN_HEIGHT;
