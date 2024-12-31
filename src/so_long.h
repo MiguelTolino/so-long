@@ -13,9 +13,13 @@
 
 #define HEIGHT_SCREEN 600
 #define WIDTH_SCREEN 800
-#define MAX_SCREEN_WIDTH 2560
-#define MAX_SCREEN_HEIGHT 1600
+#define MAX_SCREEN_WIDTH 1200
+#define MAX_SCREEN_HEIGHT 600
 #define WIN_TITLE "so_long"
+
+//#define BASIC
+//#define BONUS
+//#define BONUS2
 
 #define PLAYER_SPRITE "sprites/xpm/p.xpm"
 #define WALL_SPRITE "sprites/xpm/1.xpm"
@@ -23,6 +27,30 @@
 #define EXIT_SPRITE "sprites/xpm/e.xpm"
 #define EMPTY_SPRITE "sprites/xpm/0.xpm"
 #define TERRAIN_SPRITE "sprites/xpm/y.xpm"
+
+// Define sprite paths based on compilation type
+#if defined(BASIC)
+#define PLAYER_SPRITE "textures/basic/player.xpm"
+#define WALL_SPRITE "textures/basic/end_bg.xpm"
+#define COLLECTIBLE_SPRITE "textures/basic/coin.xpm"
+#define EXIT_SPRITE "textures/basic/cursor.xpm"
+#define EMPTY_SPRITE "textures/basic/map.xpm"
+#define TERRAIN_SPRITE "textures/basic/bg.xpm"
+#elif defined(BONUS)
+#define PLAYER_SPRITE "textures/player_01.xpm"
+#define WALL_SPRITE "textures/wall_01.xpm"
+#define COLLECTIBLE_SPRITE "textures/plant_01.xpm"
+#define EXIT_SPRITE "textures/door_01.xpm"
+#define EMPTY_SPRITE "textures/wall_02.xpm"
+#define TERRAIN_SPRITE "textures/wall_02.xpm"
+#elif defined(BONUS2)
+#define PLAYER_SPRITE "bonus2_textures/player_02.xpm"
+#define WALL_SPRITE "bonus2_textures/wall_02.xpm"
+#define COLLECTIBLE_SPRITE "bonus2_textures/plant_02.xpm"
+#define EXIT_SPRITE "bonus2_textures/door_02.xpm"
+#define EMPTY_SPRITE "bonus2_textures/wall_03.xpm"
+#define TERRAIN_SPRITE "bonus2_textures/wall_03.xpm"
+#endif
 
 enum
 {
