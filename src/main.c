@@ -39,8 +39,7 @@ int main(int argc, char **argv)
     load_sprites(&mlx);
     adjust_window_size(&game);
     create_window_and_image(&mlx);
-    mlx_loop_hook(mlx.mlx, game_loop, &game);
-    mlx_loop(mlx.mlx);
+    game_loop(&game);
     cleanup(&map, &mlx);
     return 0;
 }
